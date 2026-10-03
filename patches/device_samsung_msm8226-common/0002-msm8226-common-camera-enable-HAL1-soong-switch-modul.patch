@@ -1,0 +1,137 @@
+From 3e843c67529505789422de9712f34cc921ea7f7f Mon Sep 17 00:00:00 2001
+From: ci <ci@local>
+Date: Sat, 3 Oct 2026 19:18:40 +0000
+Subject: [PATCH] msm8226-common: camera: enable HAL1 soong switch, module API
+ 2.4 with torch support
+
+- BoardConfigCommon.mk: $(call soong_config_set,camera,legacy_hal1,true) turns on the
+  HAL1 client code added by patches/frameworks_av (select(soong_config_variable(...)) in
+  libcameraservice Android.bp).
+- CameraWrapper.cpp: report CAMERA_MODULE_API_VERSION_2_4 and implement set_callbacks()
+  and set_torch_mode(). The HIDL legacy camera provider only forwards torch requests to
+  modules >= 2.4 and calls set_callbacks() on modules >= 2.1 without a NULL check.
+  The torch writes /sys/class/leds/torch-light/brightness (msm_led_torch kernel driver,
+  present in the 3.4 tree). NOT TESTED on a device.
+---
+ BoardConfigCommon.mk     |  4 +++
+ camera/CameraWrapper.cpp | 62 ++++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 63 insertions(+), 3 deletions(-)
+
+diff --git a/BoardConfigCommon.mk b/BoardConfigCommon.mk
+index 03f95df..01ca6be 100644
+--- a/BoardConfigCommon.mk
++++ b/BoardConfigCommon.mk
+@@ -50,6 +50,10 @@ TARGET_NEEDS_LEGACY_CAMERA_HAL1_DYN_NATIVE_HANDLE := true
+ TARGET_USES_MEDIA_EXTENSIONS := true
+ TARGET_USES_NON_TREBLE_CAMERA := true
+ 
++# Camera HAL1 (HIDL device@1.0) for API1 clients: frameworks/av is patched (patches/frameworks_av) and
++# compiles the HAL1 client only when this soong config is set.
++$(call soong_config_set,camera,legacy_hal1,true)
++
+ # Dexpreopt
+ ifeq ($(HOST_OS),linux)
+   ifneq ($(TARGET_BUILD_VARIANT),eng)
+diff --git a/camera/CameraWrapper.cpp b/camera/CameraWrapper.cpp
+index c08bde9..9daabc0 100644
+--- a/camera/CameraWrapper.cpp
++++ b/camera/CameraWrapper.cpp
+@@ -28,6 +28,10 @@
+ #include <cutils/log.h>
+ 
+ #include <android-base/properties.h>
++#include <errno.h>
++#include <fcntl.h>
++#include <string.h>
++#include <unistd.h>
+ #include <utils/threads.h>
+ #include <utils/String8.h>
+ #include <hardware/hardware.h>
+@@ -78,6 +82,8 @@ static void *gUserCameraDevice = NULL;
+ static int camera_device_open(const hw_module_t* module, const char* name, hw_device_t** device);
+ static int camera_get_number_of_cameras(void);
+ static int camera_get_camera_info(int camera_id, struct camera_info* info);
++static int camera_set_callbacks(const camera_module_callbacks_t* callbacks);
++static int camera_set_torch_mode(const char* camera_id, bool enabled);
+ static int camera_send_command(struct camera_device* device, int32_t cmd, int32_t arg1,
+                                int32_t arg2);
+ 
+@@ -89,7 +95,7 @@ camera_module_t HAL_MODULE_INFO_SYM = {
+     .common =
+         {
+             .tag = HARDWARE_MODULE_TAG,
+-            .module_api_version = CAMERA_MODULE_API_VERSION_1_0,
++            .module_api_version = CAMERA_MODULE_API_VERSION_2_4,
+             .hal_api_version = HARDWARE_HAL_API_VERSION,
+             .id = CAMERA_HARDWARE_MODULE_ID,
+             .name = "Samsung msm8226 Camera Wrapper",
+@@ -101,14 +107,64 @@ camera_module_t HAL_MODULE_INFO_SYM = {
+ 
+     .get_number_of_cameras = camera_get_number_of_cameras,
+     .get_camera_info = camera_get_camera_info,
+-    .set_callbacks = NULL,      /* remove compilation warnings */
++    .set_callbacks = camera_set_callbacks,
+     .get_vendor_tag_ops = NULL, /* remove compilation warnings */
+     .open_legacy = NULL,        /* remove compilation warnings */
+-    .set_torch_mode = NULL,     /* remove compilation warnings */
++    .set_torch_mode = camera_set_torch_mode,
+     .init = NULL,               /* remove compilation warnings */
+     .reserved = {0},            /* remove compilation warnings */
+ };
+ 
++/*
++ * Torch support. The HIDL legacy camera provider only calls set_torch_mode() on modules that
++ * report CAMERA_MODULE_API_VERSION_2_4, and calls set_callbacks() (without a NULL check) on
++ * modules >= 2.1, so both are implemented here. The msm_led_torch kernel driver exposes the
++ * rear flash LED as /sys/class/leds/torch-light (UNTESTED on a device).
++ */
++#define TORCH_NODE "/sys/class/leds/torch-light/brightness"
++#define TORCH_ON_VALUE "255"
++#define TORCH_OFF_VALUE "0"
++
++static const camera_module_callbacks_t* gModuleCallbacks = NULL;
++
++static int camera_set_callbacks(const camera_module_callbacks_t* callbacks)
++{
++    gModuleCallbacks = callbacks;
++    /* Initial torch state of the only camera with a flash unit (the back camera). */
++    if (callbacks != NULL && callbacks->torch_mode_status_change != NULL) {
++        callbacks->torch_mode_status_change(callbacks, "0", TORCH_MODE_STATUS_AVAILABLE_OFF);
++    }
++    return 0;
++}
++
++static int camera_set_torch_mode(const char* camera_id, bool enabled)
++{
++    if (camera_id == NULL || strcmp(camera_id, "0") != 0) {
++        return -ENOSYS; /* the front camera has no flash unit */
++    }
++
++    int fd = open(TORCH_NODE, O_WRONLY);
++    if (fd < 0) {
++        ALOGE("%s: cannot open %s: %s", __FUNCTION__, TORCH_NODE, strerror(errno));
++        return -errno;
++    }
++
++    const char* value = enabled ? TORCH_ON_VALUE : TORCH_OFF_VALUE;
++    ssize_t written = write(fd, value, strlen(value));
++    int err = (written < 0) ? -errno : 0;
++    close(fd);
++    if (err != 0) {
++        ALOGE("%s: write to %s failed: %s", __FUNCTION__, TORCH_NODE, strerror(-err));
++        return err;
++    }
++
++    if (gModuleCallbacks != NULL && gModuleCallbacks->torch_mode_status_change != NULL) {
++        gModuleCallbacks->torch_mode_status_change(gModuleCallbacks, camera_id,
++                enabled ? TORCH_MODE_STATUS_AVAILABLE_ON : TORCH_MODE_STATUS_AVAILABLE_OFF);
++    }
++    return 0;
++}
++
+ static int get_product_device()
+ {
+     if (product_device != UNKNOWN)
+-- 
+2.43.0
+

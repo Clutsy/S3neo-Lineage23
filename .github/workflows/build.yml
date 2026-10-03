@@ -1,0 +1,230 @@
+name: LineageOS 23.2 Galaxy S3 Neo
+
+# Runs on GitHub's free runner for PUBLIC repos: 4 vCPU / 16 GB RAM / 14 GB disk, 6 h per job,
+# 10 GB cache per repo (GitHub docs). That is far below the 64 GB RAM the LineageOS wiki asks for
+# lineage-21+, so a full build may OOM or hit the 6 h cap. This workflow is built to fail fast and resume:
+#   sync     fetch sources only
+#   analyze  sync + 'm nothing' (Soong/Kati analysis, no compile): finds missing modules / removed
+#            build variables in minutes instead of hours. Run this first and fix until it passes.
+#   build    mka bacon with a time budget; ccache is saved even when the budget runs out, so re-run to continue.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "sync | analyze | build"
+        type: choice
+        default: analyze
+        options: [sync, analyze, build]
+      device:
+        description: "xx = Sony IMX175 sensor, jv = Samsung S5K4H5YB sensor"
+        type: choice
+        default: s3ve3gxx
+        options: [s3ve3gxx, s3ve3gjv]
+      variant:
+        type: choice
+        default: userdebug
+        options: [userdebug, user, eng]
+
+concurrency:
+  group: los23-s3neo
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # push logs to branch ci-logs, create the release with the ROM
+
+jobs:
+  rom:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    defaults:
+      run:
+        shell: bash
+    env:
+      TREE: /home/runner/work/los
+      CCACHE_DIR: /home/runner/work/los/.ccache
+    steps:
+      - name: Start clock
+        run: echo "START=$(date +%s)" >> "$GITHUB_ENV"
+
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@v10
+        with:
+          root-reserve-mb: 4096
+          swap-size-mb: 8192
+          remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
+          build-mount-path: /home/runner/work/los
+
+      - name: Checkout (manifest, scripts and patches live here)
+        uses: actions/checkout@v4
+        with:
+          path: cfg
+
+      - name: Build dependencies
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            bc bison build-essential ccache curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf \
+            imagemagick lib32readline-dev lib32z1-dev libelf-dev liblz4-tool libssl-dev libxml2 libxml2-utils \
+            lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python3 python-is-python3 \
+            erofs-utils protobuf-compiler patchelf openjdk-21-jdk-headless
+          mkdir -p ~/bin
+          curl -s https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+          chmod a+x ~/bin/repo
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+
+      - name: Restore ccache
+        if: ${{ inputs.mode == 'build' }}
+        uses: actions/cache/restore@v4
+        with:
+          path: /home/runner/work/los/.ccache
+          key: ccache-los23-${{ inputs.device }}-${{ github.run_id }}
+          restore-keys: ccache-los23-${{ inputs.device }}-
+
+      - name: repo init + local manifest
+        id: init
+        working-directory: /home/runner/work/los
+        run: |
+          mkdir -p ci-out
+          {
+            git config --global user.email "ci@local"
+            git config --global user.name "ci"
+            git config --global color.ui false
+            repo init --depth=1 -u https://github.com/LineageOS/android.git -b lineage-23.2 --git-lfs
+            mkdir -p .repo/local_manifests
+            cp "$GITHUB_WORKSPACE/cfg/local_manifests/s3ve3g.xml" .repo/local_manifests/
+          } 2>&1 | tee ci-out/init.log
+
+      - name: repo sync (shallow)
+        id: sync
+        working-directory: /home/runner/work/los
+        run: |
+          {
+            repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j"$(nproc)" \
+              || repo sync -c --no-clone-bundle --no-tags --force-sync -j4
+            df -h /home/runner/work/los
+          } 2>&1 | tee ci-out/sync.log
+
+      - name: Vendor blobs + patches
+        id: blobs
+        if: ${{ inputs.mode != 'sync' }}
+        working-directory: /home/runner/work/los
+        run: |
+          {
+            bash "$GITHUB_WORKSPACE/cfg/scripts/fetch_blobs.sh"
+            bash "$GITHUB_WORKSPACE/cfg/scripts/vendor_vndk29.sh"
+            bash "$GITHUB_WORKSPACE/cfg/scripts/apply_patches.sh" "$GITHUB_WORKSPACE/cfg/patches"
+          } 2>&1 | tee ci-out/blobs-patches.log
+
+      - name: Analyze (m nothing)
+        id: analyze
+        if: ${{ inputs.mode == 'analyze' }}
+        working-directory: /home/runner/work/los
+        run: |
+          export ALLOW_MISSING_DEPENDENCIES=true LC_ALL=C
+          set +e +u
+          source build/envsetup.sh
+          breakfast lineage_${{ inputs.device }} ${{ inputs.variant }} 2>&1 | tee analyze-breakfast.log
+          m nothing 2>&1 | tee analyze-m-nothing.log
+          exit "${PIPESTATUS[0]}"
+
+      - name: Build ROM (time-boxed)
+        id: build
+        if: ${{ inputs.mode == 'build' }}
+        working-directory: /home/runner/work/los
+        run: |
+          export USE_CCACHE=1 CCACHE_EXEC=/usr/bin/ccache ALLOW_MISSING_DEPENDENCIES=true LC_ALL=C
+          ccache -M 9G && ccache -o compression=true
+          # leave 25 min of the 360 for cache save + upload
+          BUDGET=$(( 21600 - 1500 - ( $(date +%s) - START ) ))
+          echo "build budget: ${BUDGET}s"
+          [ "$BUDGET" -gt 1800 ] || { echo "not enough time left after sync"; exit 1; }
+          set +e +u
+          source build/envsetup.sh
+          breakfast lineage_${{ inputs.device }} ${{ inputs.variant }} || exit 1
+          timeout --signal=INT "${BUDGET}s" mka bacon -j"$(nproc)" 2>&1 | tee build.log
+          RC=${PIPESTATUS[0]}
+          echo "mka exit: $RC (124 = time budget used up: re-run to continue from ccache)"
+          ccache -s
+          exit 0
+
+      - name: Save ccache
+        if: ${{ always() && inputs.mode == 'build' }}
+        uses: actions/cache/save@v4
+        with:
+          path: /home/runner/work/los/.ccache
+          key: ccache-los23-${{ inputs.device }}-${{ github.run_id }}
+
+      - name: Collect trimmed logs
+        if: ${{ always() }}
+        working-directory: /home/runner/work/los
+        run: |
+          mkdir -p ci-out
+          trim() { [ -f "$1" ] && tail -c 900000 "$1" > "ci-out/$2"; return 0; }
+          trim analyze-breakfast.log breakfast.txt
+          trim analyze-m-nothing.log m-nothing.txt
+          trim build.log build.txt
+          trim out/error.log error.txt
+          trim out/soong.log soong.txt
+          trim out/verbose.log verbose-tail.txt
+          {
+            echo "run_id=$GITHUB_RUN_ID mode=${{ inputs.mode }} device=${{ inputs.device }} variant=${{ inputs.variant }}"
+            echo "outcomes: init=${{ steps.init.outcome }} sync=${{ steps.sync.outcome }} blobs=${{ steps.blobs.outcome }} analyze=${{ steps.analyze.outcome }} build=${{ steps.build.outcome }}"
+            echo "elapsed_min=$(( ( $(date +%s) - START ) / 60 ))"
+            df -h /home/runner/work/los | tail -1
+            free -m | sed -n 2p
+            ls out/target/product/${{ inputs.device }}/*.zip 2>/dev/null || echo "no zip produced"
+          } > ci-out/summary.txt 2>&1
+          cat ci-out/summary.txt
+
+      - name: Push logs to branch ci-logs
+        if: ${{ always() }}
+        working-directory: /home/runner/work/los
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          RUN_DIR="run-${GITHUB_RUN_ID}-${{ inputs.mode }}-${{ inputs.device }}"
+          URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          rm -rf /tmp/logrepo
+          if git ls-remote --exit-code --heads "$URL" ci-logs >/dev/null 2>&1; then
+            git clone -q --depth 1 --branch ci-logs "$URL" /tmp/logrepo
+          else
+            mkdir /tmp/logrepo && cd /tmp/logrepo && git init -q -b ci-logs && git remote add origin "$URL"
+          fi
+          cd /tmp/logrepo
+          git config user.email ci@local; git config user.name ci
+          mkdir -p "$RUN_DIR" && cp -r /home/runner/work/los/ci-out/. "$RUN_DIR/"
+          echo "$RUN_DIR" > LATEST
+          ls -1d run-* 2>/dev/null | sort -t- -k2,2n | head -n -15 | xargs -r rm -rf
+          git add -A && git commit -q -m "logs $RUN_DIR"
+          for i in 1 2 3; do git push -q origin ci-logs && break; git pull -q --rebase origin ci-logs; done
+          echo "logs: https://github.com/${GITHUB_REPOSITORY}/tree/ci-logs/${RUN_DIR}"
+
+      - name: Publish ROM as GitHub prerelease
+        if: ${{ always() && inputs.mode == 'build' }}
+        working-directory: /home/runner/work/los
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          shopt -s nullglob
+          P=out/target/product/${{ inputs.device }}
+          FILES=($P/lineage-*.zip $P/boot.img $P/recovery.img)
+          if [ ${#FILES[@]} -eq 0 ]; then echo "No ROM produced in this run (build did not finish): re-run mode=build to continue from ccache."; exit 0; fi
+          gh release create "s3neo-${{ inputs.device }}-${GITHUB_RUN_ID}" "${FILES[@]}" \
+            --repo "$GITHUB_REPOSITORY" --prerelease \
+            --title "LineageOS 23.2 ${{ inputs.device }} (run ${GITHUB_RUN_ID}) UNTESTED" \
+            --notes "Unofficial, untested build. Back up EFS/IMEI before flashing. Logs: branch ci-logs."
+
+      - name: Upload logs artifact (fallback)
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-${{ inputs.mode }}-${{ inputs.device }}
+          path: /home/runner/work/los/ci-out/**
+          if-no-files-found: warn
+          retention-days: 7

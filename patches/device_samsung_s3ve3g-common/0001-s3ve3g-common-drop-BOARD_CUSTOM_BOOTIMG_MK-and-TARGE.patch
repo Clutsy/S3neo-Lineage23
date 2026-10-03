@@ -1,0 +1,35 @@
+From ebafb3865287ffc125a5c63ae80da287fb338907 Mon Sep 17 00:00:00 2001
+From: ci <ci@local>
+Date: Sat, 3 Oct 2026 07:09:04 +0000
+Subject: [PATCH] s3ve3g-common: drop BOARD_CUSTOM_BOOTIMG_MK and
+ TARGET_LD_SHIM_LIBS for lineage-23.2
+
+---
+ BoardConfigCommon.mk | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/BoardConfigCommon.mk b/BoardConfigCommon.mk
+index 9dc5ff8..2f2b528 100644
+--- a/BoardConfigCommon.mk
++++ b/BoardConfigCommon.mk
+@@ -54,14 +54,13 @@ BOARD_KERNEL_IMAGE_NAME := zImage
+ BOARD_KERNEL_PAGESIZE := 2048
+ BOARD_KERNEL_SEPARATED_DT := true
+ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x1e00000
+-BOARD_CUSTOM_BOOTIMG := true
+-BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
+ BOARD_RAMDISK_USE_XZ := true
+ TARGET_KERNEL_SOURCE := kernel/samsung/msm8226
+ 
+ # Legacy BLOB Support
+-TARGET_LD_SHIM_LIBS += \
+-    /system/vendor/lib/libperipheral_client.so|libshim_binder.so
++# TARGET_LD_SHIM_LIBS was removed from the bionic linker in lineage-22.x.
++# libperipheral_client.so gets libshim_binder.so as a DT_NEEDED entry instead (scripts/fetch_blobs.sh, patchelf).
++# TARGET_PROCESS_SDK_VERSION_OVERRIDE below has no consumer in upstream 23.2 either: see PORTING.md.
+ TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+     /system/bin/mediaserver=22 \
+     /system/vendor/bin/mm-qcamera-daemon=22 \
+-- 
+2.43.0
+

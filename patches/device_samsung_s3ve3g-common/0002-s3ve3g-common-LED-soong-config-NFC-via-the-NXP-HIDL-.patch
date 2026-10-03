@@ -1,0 +1,88 @@
+From fdbbf6b38bcc427de66634c86ead262dc2bc3d60 Mon Sep 17 00:00:00 2001
+From: ci <ci@local>
+Date: Sat, 3 Oct 2026 19:21:24 +0000
+Subject: [PATCH] s3ve3g-common: LED soong config, NFC via the NXP HIDL 1.2
+ service (lineage-23.2)
+
+- BoardConfigCommon.mk: set SOONG_CONFIG_samsungVars_target_specific_header_path. 23.x no longer
+  maps TARGET_SPECIFIC_HEADER_PATH to Soong (verified: absent from build/make and build/soong
+  23.2, present in 21.0), so hardware/samsung aidl/light could not find samsung_lights.h.
+  The tree's LED node (/sys/class/sec/led/led_blink) is exposed by leds-an30259a in the 3.4 kernel.
+- NFC: nfc_nci.msm8226 and android.hardware.nfc@1.0-impl/-service are gone; hardware/nxp/nfc 23.2
+  ships android.hardware.nfc@1.2-service (pn8x, PN547C2 supported, NXP_FW_NAME libpn547_fw.so).
+  Use it, declare 1.2 in the device manifest, drop NfcNci (base_system.mk already adds the NFC
+  stack) and also install libnfc-nxp.conf under /vendor/etc.
+
+NOT COMPILED, NOT TESTED on a device.
+---
+ BoardConfigCommon.mk | 6 ++++++
+ nfc/manifest.xml     | 2 +-
+ nfc/pn547/product.mk | 9 ++++-----
+ nfc/product.mk       | 1 -
+ 4 files changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/BoardConfigCommon.mk b/BoardConfigCommon.mk
+index 2f2b528..7816851 100644
+--- a/BoardConfigCommon.mk
++++ b/BoardConfigCommon.mk
+@@ -20,6 +20,12 @@ COMMON_PATH := device/samsung/s3ve3g-common
+ 
+ TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
+ 
++# 23.x dropped TargetSpecificHeaderPath from build/make and build/soong; hardware/samsung (light HAL:
++# samsung_lights.h, charging/notification LED) reads this soong config instead.
++SOONG_CONFIG_NAMESPACES += samsungVars
++SOONG_CONFIG_samsungVars += target_specific_header_path
++SOONG_CONFIG_samsungVars_target_specific_header_path := $(TARGET_SPECIFIC_HEADER_PATH)
++
+ BUILD_FINGERPRINT := samsung/s3ve3gxx/s3ve3g:4.4.2/KOT49H/I9301IXXUANL1:user/release-keys
+ 
+ # Assert
+diff --git a/nfc/manifest.xml b/nfc/manifest.xml
+index 4c4d7a1..02182c0 100644
+--- a/nfc/manifest.xml
++++ b/nfc/manifest.xml
+@@ -2,7 +2,7 @@
+     <hal format="hidl">
+         <name>android.hardware.nfc</name>
+         <transport>hwbinder</transport>
+-        <version>1.0</version>
++        <version>1.2</version>
+         <interface>
+             <name>INfc</name>
+             <instance>default</instance>
+diff --git a/nfc/pn547/product.mk b/nfc/pn547/product.mk
+index 0b9a6ff..9108753 100644
+--- a/nfc/pn547/product.mk
++++ b/nfc/pn547/product.mk
+@@ -18,11 +18,10 @@
+ $(call inherit-product, device/samsung/s3ve3g-common/nfc/product.mk)
+ 
+ PRODUCT_PACKAGES += \
+-    android.hardware.nfc@1.0-impl \
+-    android.hardware.nfc@1.0-service \
+-    libpn547_fw \
+-    nfc_nci.msm8226
++    android.hardware.nfc@1.2-service \
++    libpn547_fw
+ 
+ PRODUCT_COPY_FILES += \
+     device/samsung/s3ve3g-common/nfc/pn547/libnfc-nci.conf:system/etc/libnfc-nci.conf \
+-    device/samsung/s3ve3g-common/nfc/pn547/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
++    device/samsung/s3ve3g-common/nfc/pn547/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
++    device/samsung/s3ve3g-common/nfc/pn547/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
+diff --git a/nfc/product.mk b/nfc/product.mk
+index 005aa36..69688eb 100644
+--- a/nfc/product.mk
++++ b/nfc/product.mk
+@@ -17,7 +17,6 @@
+ # NFC
+ PRODUCT_PACKAGES += \
+     com.android.nfc_extras \
+-    NfcNci \
+     Tag
+ 
+ PRODUCT_COPY_FILES += \
+-- 
+2.43.0
+
