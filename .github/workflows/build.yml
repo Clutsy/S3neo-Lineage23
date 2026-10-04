@@ -67,7 +67,8 @@ jobs:
       - name: Build dependencies
         id: deps
         run: |
-          mkdir -p /home/runner/work/los/ci-out
+          mkdir -p /home/runner/ci-out
+          ln -sfn /home/runner/ci-out /home/runner/work/los/ci-out
           {
             df -h / /home/runner/work/los | cat
             sudo apt-get update
@@ -110,7 +111,7 @@ jobs:
             git config --global user.email "ci@local"
             git config --global user.name "ci"
             git config --global color.ui false
-            repo init --depth=1 -u https://github.com/LineageOS/android.git -b lineage-23.2 --git-lfs
+            repo init --depth=1 -g default,-darwin -u https://github.com/LineageOS/android.git -b lineage-23.2 --git-lfs
             mkdir -p .repo/local_manifests
             cp "$GITHUB_WORKSPACE/cfg/local_manifests/s3ve3g.xml" .repo/local_manifests/
           } 2>&1 | tee ci-out/init.log
@@ -119,11 +120,19 @@ jobs:
         id: sync
         working-directory: /home/runner/work/los
         run: |
-          {
-            repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j"$(nproc)" \
-              || repo sync -c --no-clone-bundle --no-tags --force-sync -j4
-            df -h /home/runner/work/los
-          } 2>&1 | tee ci-out/sync.log
+          O=/home/runner/ci-out
+          # Disk sampler + watchdog. Output goes to the ROOT volume, so it survives a full build volume.
+          ( while sleep 30; do echo "$(date +%T) build-vol used/avail GB: $(df -B1G --output=used,avail /home/runner/work/los | tail -1 | xargs)  root avail GB: $(df -B1G --output=avail / | tail -1 | xargs)"; done ) > $O/df-sync.log 2>&1 &
+          SAMPLER=$!
+          ( while sleep 10; do av=$(df -B1G --output=avail /home/runner/work/los | tail -1 | tr -d ' '); if [ "$av" -lt 4 ]; then echo "WATCHDOG: build volume has ${av} GB left, stopping repo sync" >> $O/sync.log; pkill -INT -f "repo sync"; break; fi; done ) &
+          WATCH=$!
+          set +e
+          repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 > $O/sync.log 2>&1
+          RC=$?
+          kill $SAMPLER $WATCH 2>/dev/null
+          { echo "repo sync exit: $RC"; df -h /home/runner/work/los; du -sh .repo 2>/dev/null; } >> $O/sync.log
+          tail -n 30 $O/sync.log
+          exit $RC
 
       - name: Vendor blobs + patches
         id: blobs
