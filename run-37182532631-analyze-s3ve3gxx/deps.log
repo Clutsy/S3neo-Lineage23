@@ -1,0 +1,1060 @@
+Filesystem                   Size  Used Avail Use% Mounted on
+/dev/root                    145G  145G   90M 100% /
+/dev/mapper/buildvg-buildlv   96G   28K   96G   1% /home/runner/work/los
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1364 kB]
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [304 kB]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1699 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [341 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1720 kB]
+Get:15 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [394 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5736 B]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1069 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [221 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.5 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1216 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [244 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1566 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [361 kB]
+Get:26 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [511 kB]
+Get:27 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [458 kB]
+Get:28 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.6 kB]
+Fetched 12.6 MB in 2s (5261 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+bc is already the newest version (1.07.1-3ubuntu4).
+bc set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+bison is already the newest version (2:3.8.2+dfsg-1ubuntu0.24.04.1).
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  build-essential
+0 upgraded, 1 newly installed, 0 to remove and 25 not upgraded.
+Need to get 4928 B of archives.
+After this operation, 17.4 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 build-essential amd64 12.10ubuntu1 [4928 B]
+Fetched 4928 B in 0s (54.6 kB/s)
+Selecting previously unselected package build-essential.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202296 files and directories currently installed.)
+Preparing to unpack .../build-essential_12.10ubuntu1_amd64.deb ...
+Unpacking build-essential (12.10ubuntu1) ...
+Setting up build-essential (12.10ubuntu1) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libhiredis1.1.0
+Suggested packages:
+  distcc | icecc
+The following NEW packages will be installed:
+  ccache libhiredis1.1.0
+0 upgraded, 2 newly installed, 0 to remove and 25 not upgraded.
+Need to get 633 kB of archives.
+After this operation, 1756 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libhiredis1.1.0 amd64 1.2.0-6ubuntu3 [41.4 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ccache amd64 4.9.1-1 [592 kB]
+Fetched 633 kB in 0s (3559 kB/s)
+Selecting previously unselected package libhiredis1.1.0:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202305 files and directories currently installed.)
+Preparing to unpack .../libhiredis1.1.0_1.2.0-6ubuntu3_amd64.deb ...
+Unpacking libhiredis1.1.0:amd64 (1.2.0-6ubuntu3) ...
+Selecting previously unselected package ccache.
+Preparing to unpack .../ccache_4.9.1-1_amd64.deb ...
+Unpacking ccache (4.9.1-1) ...
+Setting up libhiredis1.1.0:amd64 (1.2.0-6ubuntu3) ...
+Setting up ccache (4.9.1-1) ...
+Updating symlinks in /usr/lib/ccache ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (8.5.0-2ubuntu10.15).
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+flex is already the newest version (2.6.4-8.2build1).
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  g++-13-multilib gcc-13-multilib gcc-multilib lib32asan8 lib32atomic1
+  lib32gcc-13-dev lib32gomp1 lib32itm1 lib32quadmath0 lib32stdc++-13-dev
+  lib32ubsan1 libc6-dev-i386 libc6-dev-x32 libc6-x32 libx32asan8 libx32atomic1
+  libx32gcc-13-dev libx32gcc-s1 libx32gomp1 libx32itm1 libx32quadmath0
+  libx32stdc++-13-dev libx32stdc++6 libx32ubsan1
+Suggested packages:
+  lib32stdc++6-13-dbg libx32stdc++6-13-dbg
+The following NEW packages will be installed:
+  g++-13-multilib g++-multilib gcc-13-multilib gcc-multilib lib32asan8
+  lib32atomic1 lib32gcc-13-dev lib32gomp1 lib32itm1 lib32quadmath0
+  lib32stdc++-13-dev lib32ubsan1 libc6-dev-i386 libc6-dev-x32 libc6-x32
+  libx32asan8 libx32atomic1 libx32gcc-13-dev libx32gcc-s1 libx32gomp1
+  libx32itm1 libx32quadmath0 libx32stdc++-13-dev libx32stdc++6 libx32ubsan1
+0 upgraded, 25 newly installed, 0 to remove and 25 not upgraded.
+Need to get 22.5 MB of archives.
+After this operation, 89.8 MB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6-dev-i386 amd64 2.39-0ubuntu8.9 [1447 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6-x32 amd64 2.39-0ubuntu8.9 [2917 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6-dev-x32 amd64 2.39-0ubuntu8.9 [1637 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32gcc-s1 amd64 14.2.0-4ubuntu2~24.04.1 [78.5 kB]
+Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32gomp1 amd64 14.2.0-4ubuntu2~24.04.1 [141 kB]
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32gomp1 amd64 14.2.0-4ubuntu2~24.04.1 [144 kB]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32itm1 amd64 14.2.0-4ubuntu2~24.04.1 [29.5 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32itm1 amd64 14.2.0-4ubuntu2~24.04.1 [29.8 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32atomic1 amd64 14.2.0-4ubuntu2~24.04.1 [8594 B]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32atomic1 amd64 14.2.0-4ubuntu2~24.04.1 [10.3 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32asan8 amd64 14.2.0-4ubuntu2~24.04.1 [2880 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32asan8 amd64 14.2.0-4ubuntu2~24.04.1 [2893 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32ubsan1 amd64 14.2.0-4ubuntu2~24.04.1 [1150 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32stdc++6 amd64 14.2.0-4ubuntu2~24.04.1 [778 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32ubsan1 amd64 14.2.0-4ubuntu2~24.04.1 [1169 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32quadmath0 amd64 14.2.0-4ubuntu2~24.04.1 [227 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32quadmath0 amd64 14.2.0-4ubuntu2~24.04.1 [157 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32gcc-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2380 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32gcc-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2190 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-multilib amd64 13.3.0-6ubuntu2~24.04.1 [880 B]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32stdc++-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [1150 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libx32stdc++-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [1086 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13-multilib amd64 13.3.0-6ubuntu2~24.04.1 [892 B]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 gcc-multilib amd64 4:13.2.0-7ubuntu1 [1474 B]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 g++-multilib amd64 4:13.2.0-7ubuntu1 [884 B]
+Fetched 22.5 MB in 2s (10.3 MB/s)
+Selecting previously unselected package libc6-dev-i386.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202328 files and directories currently installed.)
+Preparing to unpack .../00-libc6-dev-i386_2.39-0ubuntu8.9_amd64.deb ...
+Unpacking libc6-dev-i386 (2.39-0ubuntu8.9) ...
+Selecting previously unselected package libc6-x32.
+Preparing to unpack .../01-libc6-x32_2.39-0ubuntu8.9_amd64.deb ...
+Unpacking libc6-x32 (2.39-0ubuntu8.9) ...
+Selecting previously unselected package libc6-dev-x32.
+Preparing to unpack .../02-libc6-dev-x32_2.39-0ubuntu8.9_amd64.deb ...
+Unpacking libc6-dev-x32 (2.39-0ubuntu8.9) ...
+Selecting previously unselected package libx32gcc-s1.
+Preparing to unpack .../03-libx32gcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32gcc-s1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package lib32gomp1.
+Preparing to unpack .../04-lib32gomp1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking lib32gomp1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32gomp1.
+Preparing to unpack .../05-libx32gomp1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32gomp1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package lib32itm1.
+Preparing to unpack .../06-lib32itm1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking lib32itm1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32itm1.
+Preparing to unpack .../07-libx32itm1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32itm1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package lib32atomic1.
+Preparing to unpack .../08-lib32atomic1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking lib32atomic1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32atomic1.
+Preparing to unpack .../09-libx32atomic1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32atomic1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package lib32asan8.
+Preparing to unpack .../10-lib32asan8_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking lib32asan8 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32asan8.
+Preparing to unpack .../11-libx32asan8_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32asan8 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package lib32ubsan1.
+Preparing to unpack .../12-lib32ubsan1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking lib32ubsan1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32stdc++6.
+Preparing to unpack .../13-libx32stdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32stdc++6 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32ubsan1.
+Preparing to unpack .../14-libx32ubsan1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32ubsan1 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package lib32quadmath0.
+Preparing to unpack .../15-lib32quadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking lib32quadmath0 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32quadmath0.
+Preparing to unpack .../16-libx32quadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32quadmath0 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package lib32gcc-13-dev.
+Preparing to unpack .../17-lib32gcc-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+Unpacking lib32gcc-13-dev (13.3.0-6ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32gcc-13-dev.
+Preparing to unpack .../18-libx32gcc-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32gcc-13-dev (13.3.0-6ubuntu2~24.04.1) ...
+Selecting previously unselected package gcc-13-multilib.
+Preparing to unpack .../19-gcc-13-multilib_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+Unpacking gcc-13-multilib (13.3.0-6ubuntu2~24.04.1) ...
+Selecting previously unselected package lib32stdc++-13-dev.
+Preparing to unpack .../20-lib32stdc++-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+Unpacking lib32stdc++-13-dev (13.3.0-6ubuntu2~24.04.1) ...
+Selecting previously unselected package libx32stdc++-13-dev.
+Preparing to unpack .../21-libx32stdc++-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+Unpacking libx32stdc++-13-dev (13.3.0-6ubuntu2~24.04.1) ...
+Selecting previously unselected package g++-13-multilib.
+Preparing to unpack .../22-g++-13-multilib_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+Unpacking g++-13-multilib (13.3.0-6ubuntu2~24.04.1) ...
+Selecting previously unselected package gcc-multilib.
+Preparing to unpack .../23-gcc-multilib_4%3a13.2.0-7ubuntu1_amd64.deb ...
+Unpacking gcc-multilib (4:13.2.0-7ubuntu1) ...
+Selecting previously unselected package g++-multilib.
+Preparing to unpack .../24-g++-multilib_4%3a13.2.0-7ubuntu1_amd64.deb ...
+Unpacking g++-multilib (4:13.2.0-7ubuntu1) ...
+Setting up libc6-dev-i386 (2.39-0ubuntu8.9) ...
+Setting up lib32itm1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up lib32ubsan1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libc6-x32 (2.39-0ubuntu8.9) ...
+Setting up libc6-dev-x32 (2.39-0ubuntu8.9) ...
+Setting up lib32gomp1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up lib32asan8 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libx32gomp1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up lib32quadmath0 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libx32quadmath0 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up lib32atomic1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libx32atomic1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libx32gcc-s1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libx32itm1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libx32asan8 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libx32stdc++6 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up libx32ubsan1 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up lib32gcc-13-dev (13.3.0-6ubuntu2~24.04.1) ...
+Setting up libx32gcc-13-dev (13.3.0-6ubuntu2~24.04.1) ...
+Setting up gcc-13-multilib (13.3.0-6ubuntu2~24.04.1) ...
+Setting up lib32stdc++-13-dev (13.3.0-6ubuntu2~24.04.1) ...
+Setting up gcc-multilib (4:13.2.0-7ubuntu1) ...
+Setting up libx32stdc++-13-dev (13.3.0-6ubuntu2~24.04.1) ...
+Setting up g++-13-multilib (13.3.0-6ubuntu2~24.04.1) ...
+Setting up g++-multilib (4:13.2.0-7ubuntu1) ...
+Processing triggers for ccache (4.9.1-1) ...
+Updating symlinks in /usr/lib/ccache ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+gcc-multilib is already the newest version (4:13.2.0-7ubuntu1).
+gcc-multilib set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.55.0-0ppa1~ubuntu24.04.2).
+git set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git-lfs is already the newest version (3.8.0).
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+gnupg is already the newest version (2.4.4-2ubuntu17.6).
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  gperf
+0 upgraded, 1 newly installed, 0 to remove and 25 not upgraded.
+Need to get 103 kB of archives.
+After this operation, 270 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 gperf amd64 3.1-1build1 [103 kB]
+Fetched 103 kB in 0s (1138 kB/s)
+Selecting previously unselected package gperf.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202967 files and directories currently installed.)
+Preparing to unpack .../gperf_3.1-1build1_amd64.deb ...
+Unpacking gperf (3.1-1build1) ...
+Setting up gperf (3.1-1build1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+Processing triggers for install-info (7.1-3build2) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  imagemagick-6.q16
+Suggested packages:
+  imagemagick-6-doc autotrace cups-bsd | lpr | lprng enscript ffmpeg gimp
+  gnuplot grads graphviz hp2xx html2ps libwmf-bin mplayer povray radiance
+  sane-utils texlive-base-bin transfig libraw-bin
+Recommended packages:
+  libmagickcore-6.q16-7-extra ghostscript netpbm
+The following NEW packages will be installed:
+  imagemagick imagemagick-6.q16
+0 upgraded, 2 newly installed, 0 to remove and 25 not upgraded.
+Need to get 268 kB of archives.
+After this operation, 655 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 imagemagick-6.q16 amd64 8:6.9.12.98+dfsg1-5.2build2 [254 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 imagemagick amd64 8:6.9.12.98+dfsg1-5.2build2 [14.2 kB]
+Fetched 268 kB in 0s (1719 kB/s)
+Selecting previously unselected package imagemagick-6.q16.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202981 files and directories currently installed.)
+Preparing to unpack .../imagemagick-6.q16_8%3a6.9.12.98+dfsg1-5.2build2_amd64.deb ...
+Unpacking imagemagick-6.q16 (8:6.9.12.98+dfsg1-5.2build2) ...
+Selecting previously unselected package imagemagick.
+Preparing to unpack .../imagemagick_8%3a6.9.12.98+dfsg1-5.2build2_amd64.deb ...
+Unpacking imagemagick (8:6.9.12.98+dfsg1-5.2build2) ...
+Setting up imagemagick-6.q16 (8:6.9.12.98+dfsg1-5.2build2) ...
+update-alternatives: using /usr/bin/compare-im6.q16 to provide /usr/bin/compare (compare) in auto mode
+update-alternatives: using /usr/bin/compare-im6.q16 to provide /usr/bin/compare-im6 (compare-im6) in auto mode
+update-alternatives: using /usr/bin/animate-im6.q16 to provide /usr/bin/animate (animate) in auto mode
+update-alternatives: using /usr/bin/animate-im6.q16 to provide /usr/bin/animate-im6 (animate-im6) in auto mode
+update-alternatives: using /usr/bin/convert-im6.q16 to provide /usr/bin/convert (convert) in auto mode
+update-alternatives: using /usr/bin/convert-im6.q16 to provide /usr/bin/convert-im6 (convert-im6) in auto mode
+update-alternatives: using /usr/bin/composite-im6.q16 to provide /usr/bin/composite (composite) in auto mode
+update-alternatives: using /usr/bin/composite-im6.q16 to provide /usr/bin/composite-im6 (composite-im6) in auto mode
+update-alternatives: using /usr/bin/conjure-im6.q16 to provide /usr/bin/conjure (conjure) in auto mode
+update-alternatives: using /usr/bin/conjure-im6.q16 to provide /usr/bin/conjure-im6 (conjure-im6) in auto mode
+update-alternatives: using /usr/bin/import-im6.q16 to provide /usr/bin/import (import) in auto mode
+update-alternatives: using /usr/bin/import-im6.q16 to provide /usr/bin/import-im6 (import-im6) in auto mode
+update-alternatives: using /usr/bin/identify-im6.q16 to provide /usr/bin/identify (identify) in auto mode
+update-alternatives: using /usr/bin/identify-im6.q16 to provide /usr/bin/identify-im6 (identify-im6) in auto mode
+update-alternatives: using /usr/bin/stream-im6.q16 to provide /usr/bin/stream (stream) in auto mode
+update-alternatives: using /usr/bin/stream-im6.q16 to provide /usr/bin/stream-im6 (stream-im6) in auto mode
+update-alternatives: using /usr/bin/display-im6.q16 to provide /usr/bin/display (display) in auto mode
+update-alternatives: using /usr/bin/display-im6.q16 to provide /usr/bin/display-im6 (display-im6) in auto mode
+update-alternatives: using /usr/bin/montage-im6.q16 to provide /usr/bin/montage (montage) in auto mode
+update-alternatives: using /usr/bin/montage-im6.q16 to provide /usr/bin/montage-im6 (montage-im6) in auto mode
+update-alternatives: using /usr/bin/mogrify-im6.q16 to provide /usr/bin/mogrify (mogrify) in auto mode
+update-alternatives: using /usr/bin/mogrify-im6.q16 to provide /usr/bin/mogrify-im6 (mogrify-im6) in auto mode
+Setting up imagemagick (8:6.9.12.98+dfsg1-5.2build2) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  lib32ncurses-dev lib32ncurses6 lib32ncursesw6 lib32readline8 lib32tinfo6
+Suggested packages:
+  ncurses-doc
+The following NEW packages will be installed:
+  lib32ncurses-dev lib32ncurses6 lib32ncursesw6 lib32readline-dev
+  lib32readline8 lib32tinfo6
+0 upgraded, 6 newly installed, 0 to remove and 25 not upgraded.
+Need to get 1017 kB of archives.
+After this operation, 4016 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32tinfo6 amd64 6.4+20240113-1ubuntu2.2 [105 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32ncurses6 amd64 6.4+20240113-1ubuntu2.2 [113 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32ncursesw6 amd64 6.4+20240113-1ubuntu2.2 [152 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32ncurses-dev amd64 6.4+20240113-1ubuntu2.2 [344 kB]
+Get:6 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 lib32readline8 amd64 8.2-4build1 [146 kB]
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 lib32readline-dev amd64 8.2-4build1 [157 kB]
+Fetched 1017 kB in 0s (2359 kB/s)
+Selecting previously unselected package lib32tinfo6.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203028 files and directories currently installed.)
+Preparing to unpack .../0-lib32tinfo6_6.4+20240113-1ubuntu2.2_amd64.deb ...
+Unpacking lib32tinfo6 (6.4+20240113-1ubuntu2.2) ...
+Selecting previously unselected package lib32ncurses6.
+Preparing to unpack .../1-lib32ncurses6_6.4+20240113-1ubuntu2.2_amd64.deb ...
+Unpacking lib32ncurses6 (6.4+20240113-1ubuntu2.2) ...
+Selecting previously unselected package lib32ncursesw6.
+Preparing to unpack .../2-lib32ncursesw6_6.4+20240113-1ubuntu2.2_amd64.deb ...
+Unpacking lib32ncursesw6 (6.4+20240113-1ubuntu2.2) ...
+Selecting previously unselected package lib32ncurses-dev.
+Preparing to unpack .../3-lib32ncurses-dev_6.4+20240113-1ubuntu2.2_amd64.deb ...
+Unpacking lib32ncurses-dev (6.4+20240113-1ubuntu2.2) ...
+Selecting previously unselected package lib32readline8.
+Preparing to unpack .../4-lib32readline8_8.2-4build1_amd64.deb ...
+Unpacking lib32readline8 (8.2-4build1) ...
+Selecting previously unselected package lib32readline-dev.
+Preparing to unpack .../5-lib32readline-dev_8.2-4build1_amd64.deb ...
+Unpacking lib32readline-dev (8.2-4build1) ...
+Setting up lib32tinfo6 (6.4+20240113-1ubuntu2.2) ...
+Setting up lib32readline8 (8.2-4build1) ...
+Setting up lib32ncurses6 (6.4+20240113-1ubuntu2.2) ...
+Setting up lib32ncursesw6 (6.4+20240113-1ubuntu2.2) ...
+Setting up lib32ncurses-dev (6.4+20240113-1ubuntu2.2) ...
+Setting up lib32readline-dev (8.2-4build1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  lib32z1
+The following NEW packages will be installed:
+  lib32z1 lib32z1-dev
+0 upgraded, 2 newly installed, 0 to remove and 25 not upgraded.
+Need to get 114 kB of archives.
+After this operation, 332 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32z1 amd64 1:1.3.dfsg-3.1ubuntu2.2 [57.5 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lib32z1-dev amd64 1:1.3.dfsg-3.1ubuntu2.2 [56.4 kB]
+Fetched 114 kB in 0s (742 kB/s)
+Selecting previously unselected package lib32z1.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203094 files and directories currently installed.)
+Preparing to unpack .../lib32z1_1%3a1.3.dfsg-3.1ubuntu2.2_amd64.deb ...
+Unpacking lib32z1 (1:1.3.dfsg-3.1ubuntu2.2) ...
+Selecting previously unselected package lib32z1-dev.
+Preparing to unpack .../lib32z1-dev_1%3a1.3.dfsg-3.1ubuntu2.2_amd64.deb ...
+Unpacking lib32z1-dev (1:1.3.dfsg-3.1ubuntu2.2) ...
+Setting up lib32z1 (1:1.3.dfsg-3.1ubuntu2.2) ...
+Setting up lib32z1-dev (1:1.3.dfsg-3.1ubuntu2.2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  libelf-dev
+0 upgraded, 1 newly installed, 0 to remove and 25 not upgraded.
+Need to get 68.5 kB of archives.
+After this operation, 385 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libelf-dev amd64 0.190-1.1ubuntu0.1 [68.5 kB]
+Fetched 68.5 kB in 0s (771 kB/s)
+Selecting previously unselected package libelf-dev:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203104 files and directories currently installed.)
+Preparing to unpack .../libelf-dev_0.190-1.1ubuntu0.1_amd64.deb ...
+Unpacking libelf-dev:amd64 (0.190-1.1ubuntu0.1) ...
+Setting up libelf-dev:amd64 (0.190-1.1ubuntu0.1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+lz4 is already the newest version (1.9.4-1build1.1).
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libssl3t64 openssl
+Suggested packages:
+  libssl-doc
+The following packages will be upgraded:
+  libssl-dev libssl3t64 openssl
+3 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Need to get 5358 kB of archives.
+After this operation, 3072 B of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libssl-dev amd64 3.0.13-0ubuntu3.16 [2409 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libssl3t64 amd64 3.0.13-0ubuntu3.16 [1945 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 openssl amd64 3.0.13-0ubuntu3.16 [1004 kB]
+Fetched 5358 kB in 0s (16.3 MB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203120 files and directories currently installed.)
+Preparing to unpack .../libssl-dev_3.0.13-0ubuntu3.16_amd64.deb ...
+Unpacking libssl-dev:amd64 (3.0.13-0ubuntu3.16) over (3.0.13-0ubuntu3.15) ...
+Preparing to unpack .../libssl3t64_3.0.13-0ubuntu3.16_amd64.deb ...
+Unpacking libssl3t64:amd64 (3.0.13-0ubuntu3.16) over (3.0.13-0ubuntu3.15) ...
+Setting up libssl3t64:amd64 (3.0.13-0ubuntu3.16) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203120 files and directories currently installed.)
+Preparing to unpack .../openssl_3.0.13-0ubuntu3.16_amd64.deb ...
+Unpacking openssl (3.0.13-0ubuntu3.16) over (3.0.13-0ubuntu3.15) ...
+Setting up libssl-dev:amd64 (3.0.13-0ubuntu3.16) ...
+Setting up openssl (3.0.13-0ubuntu3.16) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ /etc/needrestart/restart.d/systemd-manager
+ systemctl restart packagekit.service php8.3-fpm.service systemd-journald.service systemd-networkd.service systemd-resolved.service systemd-udevd.service udisks2.service
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libxml2 is already the newest version (2.9.14+dfsg-1.3ubuntu3.9).
+libxml2 set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  libxml2-utils
+0 upgraded, 1 newly installed, 0 to remove and 22 not upgraded.
+Need to get 39.4 kB of archives.
+After this operation, 189 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-utils amd64 2.9.14+dfsg-1.3ubuntu3.9 [39.4 kB]
+Fetched 39.4 kB in 0s (149 kB/s)
+Selecting previously unselected package libxml2-utils.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203120 files and directories currently installed.)
+Preparing to unpack .../libxml2-utils_2.9.14+dfsg-1.3ubuntu3.9_amd64.deb ...
+Unpacking libxml2-utils (2.9.14+dfsg-1.3ubuntu3.9) ...
+Setting up libxml2-utils (2.9.14+dfsg-1.3ubuntu3.9) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  lzop
+0 upgraded, 1 newly installed, 0 to remove and 22 not upgraded.
+Need to get 82.2 kB of archives.
+After this operation, 161 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 lzop amd64 1.04-2build3 [82.2 kB]
+Fetched 82.2 kB in 0s (819 kB/s)
+Selecting previously unselected package lzop.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203128 files and directories currently installed.)
+Preparing to unpack .../lzop_1.04-2build3_amd64.deb ...
+Unpacking lzop (1.04-2build3) ...
+Setting up lzop (1.04-2build3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  pngcrush
+0 upgraded, 1 newly installed, 0 to remove and 22 not upgraded.
+Need to get 49.5 kB of archives.
+After this operation, 135 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 pngcrush amd64 1.8.13-1build2 [49.5 kB]
+Fetched 49.5 kB in 0s (250 kB/s)
+Selecting previously unselected package pngcrush.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203143 files and directories currently installed.)
+Preparing to unpack .../pngcrush_1.8.13-1build2_amd64.deb ...
+Unpacking pngcrush (1.8.13-1build2) ...
+Setting up pngcrush (1.8.13-1build2) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+rsync is already the newest version (3.2.7-1ubuntu1.5).
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  schedtool
+0 upgraded, 1 newly installed, 0 to remove and 22 not upgraded.
+Need to get 22.0 kB of archives.
+After this operation, 52.2 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 schedtool amd64 1.3.0-4 [22.0 kB]
+Fetched 22.0 kB in 0s (238 kB/s)
+Selecting previously unselected package schedtool.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203149 files and directories currently installed.)
+Preparing to unpack .../schedtool_1.3.0-4_amd64.deb ...
+Unpacking schedtool (1.3.0-4) ...
+Setting up schedtool (1.3.0-4) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+squashfs-tools is already the newest version (1:4.6.1-1build1).
+squashfs-tools set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  xsltproc
+0 upgraded, 1 newly installed, 0 to remove and 22 not upgraded.
+Need to get 15.0 kB of archives.
+After this operation, 84.0 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xsltproc amd64 1.1.39-0exp1ubuntu0.24.04.3 [15.0 kB]
+Fetched 15.0 kB in 0s (160 kB/s)
+Selecting previously unselected package xsltproc.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203158 files and directories currently installed.)
+Preparing to unpack .../xsltproc_1.1.39-0exp1ubuntu0.24.04.3_amd64.deb ...
+Unpacking xsltproc (1.1.39-0exp1ubuntu0.24.04.3) ...
+Setting up xsltproc (1.1.39-0exp1ubuntu0.24.04.3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+zip is already the newest version (3.0-13ubuntu0.2).
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+zlib1g-dev is already the newest version (1:1.3.dfsg-3.1ubuntu2.2).
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+python3 is already the newest version (3.12.3-0ubuntu2.1).
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+python-is-python3 is already the newest version (3.11.4-1).
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Suggested packages:
+  erofsfuse
+The following NEW packages will be installed:
+  erofs-utils
+0 upgraded, 1 newly installed, 0 to remove and 22 not upgraded.
+Need to get 111 kB of archives.
+After this operation, 318 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 erofs-utils amd64 1.7.1-1build2 [111 kB]
+Fetched 111 kB in 0s (307 kB/s)
+Selecting previously unselected package erofs-utils.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203168 files and directories currently installed.)
+Preparing to unpack .../erofs-utils_1.7.1-1build2_amd64.deb ...
+Unpacking erofs-utils (1.7.1-1build2) ...
+Setting up erofs-utils (1.7.1-1build2) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libprotobuf32t64 libprotoc32t64
+Suggested packages:
+  protobuf-mode-el
+Recommended packages:
+  libprotobuf-dev
+The following NEW packages will be installed:
+  libprotobuf32t64 libprotoc32t64 protobuf-compiler
+0 upgraded, 3 newly installed, 0 to remove and 22 not upgraded.
+Need to get 1635 kB of archives.
+After this operation, 5530 kB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libprotobuf32t64 amd64 3.21.12-8.2ubuntu0.3 [923 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libprotoc32t64 amd64 3.21.12-8.2ubuntu0.3 [683 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 protobuf-compiler amd64 3.21.12-8.2ubuntu0.3 [29.0 kB]
+Fetched 1635 kB in 0s (6660 kB/s)
+Selecting previously unselected package libprotobuf32t64:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203177 files and directories currently installed.)
+Preparing to unpack .../libprotobuf32t64_3.21.12-8.2ubuntu0.3_amd64.deb ...
+Unpacking libprotobuf32t64:amd64 (3.21.12-8.2ubuntu0.3) ...
+Selecting previously unselected package libprotoc32t64:amd64.
+Preparing to unpack .../libprotoc32t64_3.21.12-8.2ubuntu0.3_amd64.deb ...
+Unpacking libprotoc32t64:amd64 (3.21.12-8.2ubuntu0.3) ...
+Selecting previously unselected package protobuf-compiler.
+Preparing to unpack .../protobuf-compiler_3.21.12-8.2ubuntu0.3_amd64.deb ...
+Unpacking protobuf-compiler (3.21.12-8.2ubuntu0.3) ...
+Setting up libprotobuf32t64:amd64 (3.21.12-8.2ubuntu0.3) ...
+Setting up libprotoc32t64:amd64 (3.21.12-8.2ubuntu0.3) ...
+Setting up protobuf-compiler (3.21.12-8.2ubuntu0.3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+patchelf is already the newest version (0.18.0-1.1build1).
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libncurses-dev is already the newest version (6.4+20240113-1ubuntu2.2).
+libncurses-dev set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+unzip is already the newest version (6.0-28ubuntu4.1).
+0 upgraded, 0 newly installed, 0 to remove and 22 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  ca-certificates-java libpcsclite1 openjdk-21-jre-headless
+Suggested packages:
+  pcscd openjdk-21-demo openjdk-21-source libnss-mdns fonts-ipafont-gothic
+  fonts-ipafont-mincho fonts-wqy-microhei | fonts-wqy-zenhei fonts-indic
+The following NEW packages will be installed:
+  ca-certificates-java libpcsclite1 openjdk-21-jdk-headless
+  openjdk-21-jre-headless
+0 upgraded, 4 newly installed, 0 to remove and 22 not upgraded.
+Need to get 129 MB of archives.
+After this operation, 299 MB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 ca-certificates-java all 20240118 [11.6 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpcsclite1 amd64 2.0.3-1build1 [21.4 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 openjdk-21-jre-headless amd64 21.0.12.1+1-1~24.04.4 [46.5 MB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 openjdk-21-jdk-headless amd64 21.0.12.1+1-1~24.04.4 [82.8 MB]
+Fetched 129 MB in 3s (38.2 MB/s)
+Selecting previously unselected package ca-certificates-java.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203225 files and directories currently installed.)
+Preparing to unpack .../ca-certificates-java_20240118_all.deb ...
+Unpacking ca-certificates-java (20240118) ...
+Selecting previously unselected package libpcsclite1:amd64.
+Preparing to unpack .../libpcsclite1_2.0.3-1build1_amd64.deb ...
+Unpacking libpcsclite1:amd64 (2.0.3-1build1) ...
+Selecting previously unselected package openjdk-21-jre-headless:amd64.
+Preparing to unpack .../openjdk-21-jre-headless_21.0.12.1+1-1~24.04.4_amd64.deb ...
+Unpacking openjdk-21-jre-headless:amd64 (21.0.12.1+1-1~24.04.4) ...
+Selecting previously unselected package openjdk-21-jdk-headless:amd64.
+Preparing to unpack .../openjdk-21-jdk-headless_21.0.12.1+1-1~24.04.4_amd64.deb ...
+Unpacking openjdk-21-jdk-headless:amd64 (21.0.12.1+1-1~24.04.4) ...
+Setting up libpcsclite1:amd64 (2.0.3-1build1) ...
+Setting up ca-certificates-java (20240118) ...
+Adding debian:ACCVRAIZ1.pem
+Adding debian:AC_RAIZ_FNMT-RCM.pem
+Adding debian:AC_RAIZ_FNMT-RCM_SERVIDORES_SEGUROS.pem
+Adding debian:ANF_Secure_Server_Root_CA.pem
+Adding debian:Actalis_Authentication_Root_CA.pem
+Adding debian:Amazon_Root_CA_1.pem
+Adding debian:Amazon_Root_CA_2.pem
+Adding debian:Amazon_Root_CA_3.pem
+Adding debian:Amazon_Root_CA_4.pem
+Adding debian:Atos_TrustedRoot_2011.pem
+Adding debian:Atos_TrustedRoot_Root_CA_ECC_TLS_2021.pem
+Adding debian:Atos_TrustedRoot_Root_CA_RSA_TLS_2021.pem
+Adding debian:Autoridad_de_Certificacion_Firmaprofesional_CIF_A62634068.pem
+Adding debian:BJCA_Global_Root_CA1.pem
+Adding debian:BJCA_Global_Root_CA2.pem
+Adding debian:Buypass_Class_2_Root_CA.pem
+Adding debian:Buypass_Class_3_Root_CA.pem
+Adding debian:CA_Disig_Root_R2.pem
+Adding debian:CFCA_EV_ROOT.pem
+Adding debian:COMODO_ECC_Certification_Authority.pem
+Adding debian:COMODO_RSA_Certification_Authority.pem
+Adding debian:Certainly_Root_E1.pem
+Adding debian:Certainly_Root_R1.pem
+Adding debian:Certigna_Root_CA.pem
+Adding debian:Certum_EC-384_CA.pem
+Adding debian:Certum_Trusted_Network_CA.pem
+Adding debian:Certum_Trusted_Network_CA_2.pem
+Adding debian:Certum_Trusted_Root_CA.pem
+Adding debian:D-TRUST_BR_Root_CA_1_2020.pem
+Adding debian:D-TRUST_BR_Root_CA_2_2023.pem
+Adding debian:D-TRUST_EV_Root_CA_1_2020.pem
+Adding debian:D-TRUST_EV_Root_CA_2_2023.pem
+Adding debian:D-TRUST_Root_Class_3_CA_2_2009.pem
+Adding debian:D-TRUST_Root_Class_3_CA_2_EV_2009.pem
+Adding debian:DigiCert_Assured_ID_Root_G2.pem
+Adding debian:DigiCert_Assured_ID_Root_G3.pem
+Adding debian:DigiCert_Global_Root_G2.pem
+Adding debian:DigiCert_Global_Root_G3.pem
+Adding debian:DigiCert_TLS_ECC_P384_Root_G5.pem
+Adding debian:DigiCert_TLS_RSA4096_Root_G5.pem
+Adding debian:DigiCert_Trusted_Root_G4.pem
+Adding debian:Entrust_Root_Certification_Authority.pem
+Adding debian:GDCA_TrustAUTH_R5_ROOT.pem
+Adding debian:GTS_Root_R1.pem
+Adding debian:GTS_Root_R3.pem
+Adding debian:GTS_Root_R4.pem
+Adding debian:GlobalSign_ECC_Root_CA_-_R4.pem
+Adding debian:GlobalSign_ECC_Root_CA_-_R5.pem
+Adding debian:GlobalSign_Root_CA_-_R3.pem
+Adding debian:GlobalSign_Root_CA_-_R6.pem
+Adding debian:GlobalSign_Root_E46.pem
+Adding debian:GlobalSign_Root_R46.pem
+Adding debian:Go_Daddy_Root_Certificate_Authority_-_G2.pem
+Adding debian:HARICA_TLS_ECC_Root_CA_2021.pem
+Adding debian:HARICA_TLS_RSA_Root_CA_2021.pem
+Adding debian:Hellenic_Academic_and_Research_Institutions_ECC_RootCA_2015.pem
+Adding debian:Hellenic_Academic_and_Research_Institutions_RootCA_2015.pem
+Adding debian:HiPKI_Root_CA_-_G1.pem
+Adding debian:Hongkong_Post_Root_CA_3.pem
+Adding debian:ISRG_Root_X1.pem
+Adding debian:ISRG_Root_X2.pem
+Adding debian:IdenTrust_Commercial_Root_CA_1.pem
+Adding debian:IdenTrust_Public_Sector_Root_CA_1.pem
+Adding debian:Izenpe.com.pem
+Adding debian:Microsec_e-Szigno_Root_CA_2009.pem
+Adding debian:Microsoft_ECC_Root_Certificate_Authority_2017.pem
+Adding debian:Microsoft_RSA_Root_Certificate_Authority_2017.pem
+Adding debian:NAVER_Global_Root_Certification_Authority.pem
+Adding debian:NetLock_Arany_=Class_Gold=_Főtanúsítvány.pem
+Adding debian:OISTE_Server_Root_ECC_G1.pem
+Adding debian:OISTE_Server_Root_RSA_G1.pem
+Adding debian:OISTE_WISeKey_Global_Root_GB_CA.pem
+Adding debian:OISTE_WISeKey_Global_Root_GC_CA.pem
+Adding debian:QuoVadis_Root_CA_1_G3.pem
+Adding debian:QuoVadis_Root_CA_2_G3.pem
+Adding debian:QuoVadis_Root_CA_3_G3.pem
+Adding debian:SSL.com_EV_Root_Certification_Authority_ECC.pem
+Adding debian:SSL.com_EV_Root_Certification_Authority_RSA_R2.pem
+Adding debian:SSL.com_Root_Certification_Authority_ECC.pem
+Adding debian:SSL.com_Root_Certification_Authority_RSA.pem
+Adding debian:SSL.com_TLS_ECC_Root_CA_2022.pem
+Adding debian:SSL.com_TLS_RSA_Root_CA_2022.pem
+Adding debian:SZAFIR_ROOT_CA2.pem
+Adding debian:Sectigo_Public_Server_Authentication_Root_E46.pem
+Adding debian:Sectigo_Public_Server_Authentication_Root_R46.pem
+Adding debian:SecureSign_Root_CA12.pem
+Adding debian:SecureSign_Root_CA14.pem
+Adding debian:SecureSign_Root_CA15.pem
+Adding debian:Security_Communication_ECC_RootCA1.pem
+Adding debian:Security_Communication_RootCA2.pem
+Adding debian:Starfield_Root_Certificate_Authority_-_G2.pem
+Adding debian:Starfield_Services_Root_Certificate_Authority_-_G2.pem
+Adding debian:SwissSign_RSA_TLS_Root_CA_2022_-_1.pem
+Adding debian:T-TeleSec_GlobalRoot_Class_2.pem
+Adding debian:T-TeleSec_GlobalRoot_Class_3.pem
+Adding debian:TUBITAK_Kamu_SM_SSL_Kok_Sertifikasi_-_Surum_1.pem
+Adding debian:TWCA_CYBER_Root_CA.pem
+Adding debian:TWCA_Global_Root_CA.pem
+Adding debian:TWCA_Root_Certification_Authority.pem
+Adding debian:Telekom_Security_TLS_ECC_Root_2020.pem
+Adding debian:Telekom_Security_TLS_RSA_Root_2023.pem
+Adding debian:Telia_Root_CA_v2.pem
+Adding debian:TrustAsia_Global_Root_CA_G3.pem
+Adding debian:TrustAsia_Global_Root_CA_G4.pem
+Adding debian:TrustAsia_TLS_ECC_Root_CA.pem
+Adding debian:TrustAsia_TLS_RSA_Root_CA.pem
+Adding debian:TunTrust_Root_CA.pem
+Adding debian:UCA_Extended_Validation_Root.pem
+Adding debian:UCA_Global_G2_Root.pem
+Adding debian:USERTrust_ECC_Certification_Authority.pem
+Adding debian:USERTrust_RSA_Certification_Authority.pem
+Adding debian:certSIGN_Root_CA_G2.pem
+Adding debian:e-Szigno_Root_CA_2017.pem
+Adding debian:e-Szigno_TLS_Root_CA_2023.pem
+Adding debian:ePKI_Root_Certification_Authority.pem
+Adding debian:emSign_ECC_Root_CA_-_C3.pem
+Adding debian:emSign_ECC_Root_CA_-_G3.pem
+Adding debian:emSign_Root_CA_-_C1.pem
+Adding debian:emSign_Root_CA_-_G1.pem
+Adding debian:vTrus_ECC_Root_CA.pem
+Adding debian:vTrus_Root_CA.pem
+done.
+Setting up openjdk-21-jre-headless:amd64 (21.0.12.1+1-1~24.04.4) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Processing triggers for ca-certificates-java (20240118) ...
+done.
+Setting up openjdk-21-jdk-headless:amd64 (21.0.12.1+1-1~24.04.4) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+ systemctl restart systemd-logind.service
+ systemctl restart walinuxagent.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ runner @ user manager service: systemd[1003]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Filesystem                   Size  Used Avail Use% Mounted on
+/dev/root                    145G  144G  993M 100% /
+/dev/mapper/buildvg-buildlv   96G   92K   96G   1% /home/runner/work/los
+dependencies OK
