@@ -65,17 +65,31 @@ jobs:
           path: cfg
 
       - name: Build dependencies
+        id: deps
         run: |
-          sudo apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
-            bc bison build-essential ccache curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf \
-            imagemagick lib32readline-dev lib32z1-dev libelf-dev liblz4-tool libssl-dev libxml2 libxml2-utils \
-            lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python3 python-is-python3 \
-            erofs-utils protobuf-compiler patchelf openjdk-21-jdk-headless
-          mkdir -p ~/bin
-          curl -s https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-          chmod a+x ~/bin/repo
-          echo "$HOME/bin" >> "$GITHUB_PATH"
+          mkdir -p /home/runner/work/los/ci-out
+          {
+            sudo apt-get update
+            for p in bc bison build-essential ccache curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf \
+                     imagemagick lib32readline-dev lib32z1-dev libelf-dev lz4 libssl-dev libxml2 libxml2-utils \
+                     lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python3 python-is-python3 \
+                     erofs-utils protobuf-compiler patchelf libncurses-dev unzip openjdk-21-jdk-headless; do
+              sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "$p" \
+                || echo "DEP-FAIL: $p"
+            done
+            mkdir -p ~/bin
+            curl -fsSL https://storage.googleapis.com/git-repo-downloads/repo -o ~/bin/repo
+            chmod a+x ~/bin/repo
+            echo "$HOME/bin" >> "$GITHUB_PATH"
+            # hard requirements: fail here, with the list, instead of deep inside the build
+            missing=""
+            for c in git git-lfs curl rsync zip bison flex gperf xsltproc ccache patchelf python3; do
+              command -v "$c" >/dev/null || missing="$missing $c"
+            done
+            [ -x ~/bin/repo ] || missing="$missing repo"
+            if [ -n "$missing" ]; then echo "MISSING TOOLS:$missing"; exit 1; fi
+            echo "dependencies OK"
+          } 2>&1 | tee /home/runner/work/los/ci-out/deps.log
 
       - name: Restore ccache
         if: ${{ inputs.mode == 'build' }}
@@ -173,7 +187,7 @@ jobs:
           trim out/verbose.log verbose-tail.txt
           {
             echo "run_id=$GITHUB_RUN_ID mode=${{ inputs.mode }} device=${{ inputs.device }} variant=${{ inputs.variant }}"
-            echo "outcomes: init=${{ steps.init.outcome }} sync=${{ steps.sync.outcome }} blobs=${{ steps.blobs.outcome }} analyze=${{ steps.analyze.outcome }} build=${{ steps.build.outcome }}"
+            echo "outcomes: deps=${{ steps.deps.outcome }} init=${{ steps.init.outcome }} sync=${{ steps.sync.outcome }} blobs=${{ steps.blobs.outcome }} analyze=${{ steps.analyze.outcome }} build=${{ steps.build.outcome }}"
             echo "elapsed_min=$(( ( $(date +%s) - START ) / 60 ))"
             df -h /home/runner/work/los | tail -1
             free -m | sed -n 2p
