@@ -16,23 +16,12 @@
   <project path="device/samsung/qcom-common" name="LineageOS/android_device_samsung_qcom-common" revision="lineage-22.2" />
   <project path="hardware/sony/timekeep"     name="LineageOS/android_hardware_sony_timekeep"     revision="lineage-23.2" />
 
-  <!-- Legacy qcom HALs: LOS 21.0 default.xml carries them, 23.2 default.xml only keeps hardware/qcom/wlan.
-       Newest plain (non-caf) branch that exists on GitHub for each:
-       audio 23.2, display 22.2, media 22.2, gps 23.0, camera 22.2, bt 23.0. -->
-  <project path="hardware/qcom/audio"   name="LineageOS/android_hardware_qcom_audio"   revision="lineage-23.2" />
-  <project path="hardware/qcom/display" name="LineageOS/android_hardware_qcom_display" revision="lineage-22.2" />
-  <project path="hardware/qcom/media"   name="LineageOS/android_hardware_qcom_media"   revision="lineage-22.2" />
-  <project path="hardware/qcom/gps"     name="LineageOS/android_hardware_qcom_gps"     revision="lineage-23.0" />
-  <project path="hardware/qcom/camera"  name="LineageOS/android_hardware_qcom_camera"  revision="lineage-22.2" />
-  <project path="hardware/qcom/bt"      name="LineageOS/android_hardware_qcom_bt"      revision="lineage-23.0" />
+  <!-- hardware/qcom/{audio,bt,camera,display,gps,media} and prebuilts/gcc/.../arm-linux-androideabi-4.9 come from
+       LineageOS snippets/lineage.xml (included by default.xml): do not redeclare them (duplicate path = repo sync error). -->
 
   <!-- msm8226-common sepolicy.mk includes device/qcom/sepolicy-legacy/sepolicy.mk.
        Last branch with a plain "-legacy" policy is lineage-18.1-legacy (very old: expect SELinux work). -->
   <project path="device/qcom/sepolicy-legacy" name="LineageOS/android_device_qcom_sepolicy" revision="lineage-18.1-legacy" />
-
-  <!-- Kernel 3.4 needs GCC 4.9; LOS 23.2 no longer ships it (verified: default.xml has only host gcc). -->
-  <project path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9"
-           name="LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9" revision="lineage-19.1" clone-depth="1" />
 
   <!-- Found by static pass 2 (verified in sources on 2026-10-03):
        - hardware/samsung is not in the 23.2 default.xml (qcom-common lists it as a dependency); branch lineage-23.2 exists.

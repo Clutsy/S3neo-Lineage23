@@ -133,3 +133,12 @@ declares 1.2 in `nfc/manifest.xml`, drops `NfcNci` (23.2 `base_system.mk` adds t
 
 **Still open:** process SDK overrides (mediaserver/mm-qcamera-daemon/rild), legacy SELinux policy, `device_perms.h` (property perms via init),
 mkbootimg fork vs Android 16 releasetools, kernel toolchain wiring in the 23.2 build.
+
+## Correction (found by the first real `repo sync` on GitHub, 2026-10-03)
+
+Earlier sections said LOS 23.2 `default.xml` keeps only `hardware/qcom/wlan` from the legacy qcom set and does not ship GCC 4.9.
+That was wrong: I had only read `default.xml`, not the `snippets/lineage.xml` it includes. The snippet already provides
+`hardware/qcom/{audio,bt,camera,display,gps,media}` and `prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9`.
+Redeclaring them in the local manifest made `repo sync` abort with `duplicate path hardware/qcom/audio`; they are removed from
+`local_manifests/s3ve3g.xml` (11 projects left). What the local manifest still adds is verified absent from default.xml + the snippet.
+Lesson kept: static checks now read default.xml and every included snippet.
