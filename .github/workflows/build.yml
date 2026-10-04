@@ -47,17 +47,26 @@ jobs:
       - name: Start clock
         run: echo "START=$(date +%s)" >> "$GITHUB_ENV"
 
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@v10
-        with:
-          root-reserve-mb: 20480
-          swap-size-mb: 8192
-          remove-dotnet: "true"
-          remove-android: "true"
-          remove-haskell: "true"
-          remove-codeql: "true"
-          remove-docker-images: "true"
-          build-mount-path: /home/runner/work/los
+      - name: Free disk space (hosted runner = one 150 GB NVMe, no /mnt disk)
+        run: |
+          df -h / | tail -1
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/boost /usr/local/.ghcup /usr/share/swift /opt/az /usr/local/julia* \
+            /usr/local/share/chromium /opt/microsoft 2>/dev/null || true
+          sudo docker system prune -af >/dev/null 2>&1 || true
+          sudo apt-get clean
+          sudo mkdir -p /home/runner/work/los
+          sudo chown runner:runner /home/runner/work/los
+          df -h / | tail -1
+
+      - name: Extra swap (build mode only)
+        if: ${{ inputs.mode == 'build' }}
+        run: |
+          sudo fallocate -l 8G /swapfile2
+          sudo chmod 600 /swapfile2
+          sudo mkswap /swapfile2
+          sudo swapon /swapfile2
+          swapon --show
 
       - name: Checkout (manifest, scripts and patches live here)
         uses: actions/checkout@v4
