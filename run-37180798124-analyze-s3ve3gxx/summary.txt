@@ -1,0 +1,6 @@
+run_id=37180798124 mode=analyze device=s3ve3gxx variant=userdebug
+outcomes: init=skipped sync=skipped blobs=skipped analyze=skipped build=skipped
+elapsed_min=1
+/dev/mapper/buildvg-buildlv   96G   32K   96G   1% /home/runner/work/los
+Mem:           15989        1100       11890          46        3374       14888
+no zip produced
