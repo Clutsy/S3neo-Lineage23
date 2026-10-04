@@ -1,0 +1,2 @@
+error: in `sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j4`: duplicate path hardware/qcom/audio in /home/runner/work/los/.repo/manifest.xml
+error: in `sync -c --no-clone-bundle --no-tags --force-sync -j4`: duplicate path hardware/qcom/audio in /home/runner/work/los/.repo/manifest.xml
