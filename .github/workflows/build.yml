@@ -47,13 +47,21 @@ jobs:
       - name: Start clock
         run: echo "START=$(date +%s)" >> "$GITHUB_ENV"
 
-      - name: Free disk space (hosted runner = one 150 GB NVMe, no /mnt disk)
+      - name: Free disk space (community action, pinned)
+        uses: jlumbroso/free-disk-space@36e9a5af4eddb91fc11aec4c6f6f79b3cc0cb523
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: false
+
+      - name: Free leftover space + work dir
         run: |
-          df -h / | tail -1
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL \
-            /usr/local/share/boost /usr/local/.ghcup /usr/share/swift /opt/az /usr/local/julia* \
-            /usr/local/share/chromium /opt/microsoft 2>/dev/null || true
-          sudo docker system prune -af >/dev/null 2>&1 || true
+          sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /opt/az /usr/local/julia* \
+            /usr/local/share/chromium /opt/microsoft /usr/local/.ghcup 2>/dev/null || true
           sudo apt-get clean
           sudo mkdir -p /home/runner/work/los
           sudo chown runner:runner /home/runner/work/los
@@ -125,22 +133,39 @@ jobs:
             cp "$GITHUB_WORKSPACE/cfg/local_manifests/s3ve3g.xml" .repo/local_manifests/
           } 2>&1 | tee ci-out/init.log
 
-      - name: repo sync (shallow)
+      - name: repo sync (shallow, space-guarded)
         id: sync
         working-directory: /home/runner/work/los
         run: |
           O=/home/runner/ci-out
-          # Disk sampler + watchdog. Output goes to the ROOT volume, so it survives a full build volume.
-          ( while sleep 30; do echo "$(date +%T) build-vol used/avail GB: $(df -B1G --output=used,avail /home/runner/work/los | tail -1 | xargs)  root avail GB: $(df -B1G --output=avail / | tail -1 | xargs)"; done ) > $O/df-sync.log 2>&1 &
+          mkdir -p "$O"
+          ( while sleep 20; do echo "$(date +%T) used=$(df -B1G --output=used / | tail -1 | tr -d ' ')G avail=$(df -B1G --output=avail / | tail -1 | tr -d ' ')G"; done ) > "$O/df-sync.log" 2>&1 &
           SAMPLER=$!
-          ( while sleep 10; do av=$(df -B1G --output=avail /home/runner/work/los | tail -1 | tr -d ' '); if [ "$av" -lt 4 ]; then echo "WATCHDOG: build volume has ${av} GB left, stopping repo sync" >> $O/sync.log; pkill -INT -f "repo sync"; break; fi; done ) &
-          WATCH=$!
           set +e
-          repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 > $O/sync.log 2>&1
-          RC=$?
-          kill $SAMPLER $WATCH 2>/dev/null
-          { echo "repo sync exit: $RC"; df -h /home/runner/work/los; du -sh .repo 2>/dev/null; } >> $O/sync.log
-          tail -n 30 $O/sync.log
+          repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 > "$O/sync.log" 2>&1 &
+          SYNC=$!
+          KILLED=0
+          while kill -0 "$SYNC" 2>/dev/null; do
+            AV=$(df -B1G --output=avail / | tail -1 | tr -d ' ')
+            if [ "$AV" -lt 15 ]; then
+              KILLED=1
+              echo "WATCHDOG: only ${AV} GB left on /, stopping repo sync" >> "$O/sync.log"
+              pkill -TERM -f "repo sync"; pkill -TERM -x git; pkill -TERM -f git-lfs; sleep 3
+              pkill -KILL -f "repo sync"; pkill -KILL -x git; pkill -KILL -f git-lfs
+              break
+            fi
+            sleep 2
+          done
+          wait "$SYNC" 2>/dev/null; RC=$?
+          kill "$SAMPLER" 2>/dev/null
+          [ "$KILLED" = 1 ] && RC=99
+          {
+            echo "repo sync exit: $RC (99 = stopped by the disk watchdog)"
+            df -h /
+            timeout 180 du -sh .repo/project-objects .repo/projects 2>/dev/null
+            echo "--- last progress lines:"
+            tr '\r' '\n' < "$O/sync.log" | grep -E "^(Fetching|Checking out|Syncing)" | tail -4
+          } | tee "$O/sync-summary.txt"
           exit $RC
 
       - name: Vendor blobs + patches
@@ -198,6 +223,7 @@ jobs:
         working-directory: /home/runner/work/los
         run: |
           mkdir -p ci-out
+          [ -f ci-out/sync.log ] && tail -c 900000 ci-out/sync.log > ci-out/sync.log.tmp && mv ci-out/sync.log.tmp ci-out/sync.log
           trim() { [ -f "$1" ] && tail -c 900000 "$1" > "ci-out/$2"; return 0; }
           trim analyze-breakfast.log breakfast.txt
           trim analyze-m-nothing.log m-nothing.txt
