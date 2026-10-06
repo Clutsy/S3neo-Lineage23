@@ -25,6 +25,11 @@ on:
         type: choice
         default: userdebug
         options: [userdebug, user, eng]
+      runner:
+        description: "github-hosted (free, ~116 GB disk: too small for the full build) | self-hosted (your PC or a VM, labels self-hosted,linux,x64)"
+        type: choice
+        default: github-hosted
+        options: [github-hosted, self-hosted]
 
 concurrency:
   group: los23-s3neo
@@ -35,8 +40,8 @@ permissions:
 
 jobs:
   rom:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 360
+    runs-on: ${{ inputs.runner == 'self-hosted' && fromJSON('["self-hosted","linux","x64"]') || 'ubuntu-24.04' }}
+    timeout-minutes: ${{ inputs.runner == 'self-hosted' && 1440 || 360 }}
     defaults:
       run:
         shell: bash
@@ -48,6 +53,7 @@ jobs:
         run: echo "START=$(date +%s)" >> "$GITHUB_ENV"
 
       - name: Free disk space (community action, pinned)
+        if: ${{ inputs.runner != 'self-hosted' }}
         uses: jlumbroso/free-disk-space@36e9a5af4eddb91fc11aec4c6f6f79b3cc0cb523
         with:
           tool-cache: true
@@ -60,15 +66,17 @@ jobs:
 
       - name: Free leftover space + work dir
         run: |
-          sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /opt/az /usr/local/julia* \
-            /usr/local/share/chromium /opt/microsoft /usr/local/.ghcup 2>/dev/null || true
-          sudo apt-get clean
+          if [ "${{ inputs.runner }}" != "self-hosted" ]; then
+            sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /opt/az /usr/local/julia* \
+              /usr/local/share/chromium /opt/microsoft /usr/local/.ghcup 2>/dev/null || true
+            sudo apt-get clean
+          fi
           sudo mkdir -p /home/runner/work/los
           sudo chown runner:runner /home/runner/work/los
           df -h / | tail -1
 
-      - name: Extra swap (build mode only)
-        if: ${{ inputs.mode == 'build' }}
+      - name: Extra swap (build mode, hosted runner only)
+        if: ${{ inputs.mode == 'build' && inputs.runner != 'self-hosted' }}
         run: |
           sudo fallocate -l 8G /swapfile2
           sudo chmod 600 /swapfile2
@@ -112,7 +120,7 @@ jobs:
           } 2>&1 | tee /home/runner/work/los/ci-out/deps.log
 
       - name: Restore ccache
-        if: ${{ inputs.mode == 'build' }}
+        if: ${{ inputs.mode == 'build' && inputs.runner != 'self-hosted' }}
         uses: actions/cache/restore@v4
         with:
           path: /home/runner/work/los/.ccache
@@ -198,8 +206,9 @@ jobs:
         run: |
           export USE_CCACHE=1 CCACHE_EXEC=/usr/bin/ccache ALLOW_MISSING_DEPENDENCIES=true LC_ALL=C
           ccache -M 9G && ccache -o compression=true
-          # leave 25 min of the 360 for cache save + upload
-          BUDGET=$(( 21600 - 1500 - ( $(date +%s) - START ) ))
+          # leave 25 min of the job limit for cache save + upload
+          TOTAL=${{ inputs.runner == 'self-hosted' && 86400 || 21600 }}
+          BUDGET=$(( TOTAL - 1500 - ( $(date +%s) - START ) ))
           echo "build budget: ${BUDGET}s"
           [ "$BUDGET" -gt 1800 ] || { echo "not enough time left after sync"; exit 1; }
           set +e +u
@@ -212,7 +221,7 @@ jobs:
           exit 0
 
       - name: Save ccache
-        if: ${{ always() && inputs.mode == 'build' }}
+        if: ${{ always() && inputs.mode == 'build' && inputs.runner != 'self-hosted' }}
         uses: actions/cache/save@v4
         with:
           path: /home/runner/work/los/.ccache
