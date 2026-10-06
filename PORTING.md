@@ -142,3 +142,14 @@ That was wrong: I had only read `default.xml`, not the `snippets/lineage.xml` it
 Redeclaring them in the local manifest made `repo sync` abort with `duplicate path hardware/qcom/audio`; they are removed from
 `local_manifests/s3ve3g.xml` (11 projects left). What the local manifest still adds is verified absent from default.xml + the snippet.
 Lesson kept: static checks now read default.xml and every included snippet.
+
+## Measured on the GitHub-hosted runner (run 37413953808, 2026-10-05): the LOS 23.2 tree does not fit
+
+- Runner: 4 vCPU, 16 GB RAM, ONE 145 GB disk (no separate /mnt disk). `easimon/maximize-build-space` assumes a temp disk and left `/` at 0 bytes free.
+- Cleanup with the pinned community action `jlumbroso/free-disk-space` (tool-cache, android, dotnet, haskell, large-packages, docker-images):
+  22 GB used / 123 GB free before the sync.
+- `repo sync -c --depth=1` (LOS 23.2 + local manifest, git-lfs on): used grew 25 -> 114 GB in 8 minutes, then slowly 114 -> 130 GB
+  until the watchdog stopped it at 15 GB free, still not finished. `.repo/project-objects` = 27 GB, so the checked-out tree is ~75 GB or more.
+  => the source tree alone is >= 108 GB. The full build needs a lot more room for `out/`.
+- Conclusion: free hosted runners cannot do `mode=build`, and `mode=analyze` only fits if the tree is trimmed by dozens of GB.
+  Use `runner=self-hosted` (see ISTRUZIONI_GITHUB.md section 7) on a machine with >= 300 GB free disk and 32 GB RAM or more.

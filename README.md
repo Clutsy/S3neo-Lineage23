@@ -10,6 +10,9 @@ La wiki LineageOS chiede 64 GB di RAM per lineage-21+, quindi può servire più 
 
 **Istruzioni complete passo-passo (repo, impostazioni, token): `ISTRUZIONI_GITHUB.md`.**
 
+> **Misurato su GitHub (run 37413953808):** il runner gratuito ha un solo disco da 145 GB (123 GB liberi dopo la pulizia) e la sola sync dei sorgenti di LOS 23.2
+> supera 105 GB senza finire. La build completa non gira lì: usa `runner = self-hosted` (vedi `ISTRUZIONI_GITHUB.md`, sezione 7).
+
 ## Come lanciarla
 1. Crea un repo **pubblico** su GitHub (nei repo privati il runner è più piccolo e consuma minuti).
 2. Carica tutto il contenuto di questa cartella, compresa `.github/`, nella root del repo.
