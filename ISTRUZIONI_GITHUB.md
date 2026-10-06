@@ -59,3 +59,25 @@ Cose da sapere sul token:
 - 16 GB di RAM sono molto meno dei 64 GB che la wiki di LineageOS chiede per lineage-21+: possibile fuori memoria o più run.
 - "Compila" non vuol dire "funziona": camera, NFC, LED e flash sono stati preparati nel codice ma non provati su un telefono.
 - Prima di flashare: backup di EFS/IMEI e di una ROM funzionante, e un recovery (TWRP) già testato sul telefono.
+
+---
+
+## 7. Runner sul tuo PC (per la build completa)
+
+Il runner gratuito di GitHub ha un disco da 150 GB (circa 116 GB liberi dopo la pulizia): troppo poco per sorgenti e `out/` di LineageOS 23.2.
+Il workflow ha l'input `runner`: con `self-hosted` gira su una macchina tua, con lo stesso codice e gli stessi log.
+
+Requisiti consigliati: Linux (Ubuntu 22.04/24.04) o WSL2, 16 GB di RAM come minimo (meglio 32 GB o più, con swap),
+300 GB di disco libero, 8 core o più, `sudo` senza password per l'utente del runner (il workflow installa i pacchetti con apt).
+
+1. Sulla macchina crea un utente `runner` (il workflow usa il percorso `/home/runner/work/los`):
+   `sudo useradd -m -s /bin/bash runner && echo "runner ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/runner`
+2. Su GitHub: repo → **Settings → Actions → Runners → New self-hosted runner → Linux, x64**.
+   Esegui i comandi che mostra come utente `runner`. Lascia le etichette predefinite.
+3. Avvia `./run.sh` (o installalo come servizio con `sudo ./svc.sh install runner && sudo ./svc.sh start`).
+4. **Actions → Run workflow**, `runner = self-hosted`, `mode = analyze`, poi `build`.
+   Sul tuo disco la ccache resta tra una run e l'altra, senza il limite di 10 GB di GitHub.
+
+Sicurezza: un runner self-hosted esegue codice sulla tua macchina. Il workflow parte solo con `workflow_dispatch`
+(non da pull request), che è la configurazione sicura per un repo pubblico. Non aggiungere trigger `pull_request`.
+In **Settings → Actions → General** lascia "Require approval for all outside collaborators".
