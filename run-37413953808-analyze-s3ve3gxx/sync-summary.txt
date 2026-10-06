@@ -1,0 +1,6 @@
+repo sync exit: 99 (99 = stopped by the disk watchdog)
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       145G  131G   14G  91% /
+27G	.repo/project-objects
+1.2G	.repo/projects
+--- last progress lines:

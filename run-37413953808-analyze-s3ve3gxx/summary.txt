@@ -1,0 +1,6 @@
+run_id=37413953808 mode=analyze device=s3ve3gxx variant=userdebug
+outcomes: deps=success init=success sync=failure blobs=skipped analyze=skipped build=skipped
+elapsed_min=22
+/dev/root       145G  131G   14G  91% /
+Mem:           15989        1047        3970          33       11350       14941
+no zip produced

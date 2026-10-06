@@ -1,0 +1,25 @@
+error.GitError: Cannot checkout platform/prebuilts/clang/host/linux-x86: Cannot initialize work tree for platform/prebuilts/clang/host/linux-x86
+error: Unable to fully sync the tree
+error: Checking out local projects failed.
+Failing repos (checkout):
+prebuilts/clang/host/linux-x86
+Try re-running with "-j1 --fail-fast" to exit at the first error.
+================================================================================
+Repo command failed due to the following `SyncError` errors:
+Cannot initialize work tree for platform/prebuilts/clang/host/linux-x86
+device/qcom/sepolicy: Shared project LineageOS/android_device_qcom_sepolicy found, disabling pruning.
+device/qcom/sepolicy_vndr/legacy-um: Shared project LineageOS/android_device_qcom_sepolicy_vndr found, disabling pruning.
+hardware/qcom-caf/msm8953/display: Shared project LineageOS/android_hardware_qcom_display found, disabling pruning.
+hardware/qcom-caf/msm8953/media: Shared project LineageOS/android_hardware_qcom_media found, disabling pruning.
+hardware/qcom-caf/sm8450-6.6/dataipa: Shared project LineageOS/android_vendor_qcom_opensource_dataipa found, disabling pruning.
+hardware/qcom-caf/sm8450-6.6/display/core: Shared project LineageOS/android_vendor_qcom_opensource_display-core found, disabling pruning.
+hardware/qcom-caf/sm8450-6.6/display/intf: Shared project LineageOS/android_vendor_qcom_opensource_display-intf found, disabling pruning.
+hardware/qcom-caf/sm8450/audio/agm: Shared project LineageOS/android_vendor_qcom_opensource_agm found, disabling pruning.
+hardware/qcom-caf/sm8450/audio/graphservices: Shared project LineageOS/android_vendor_qcom_opensource_audioreach-graphservices found, disabling pruning.
+hardware/qcom-caf/sm8450/audio/pal: Shared project LineageOS/android_vendor_qcom_opensource_arpal-lx found, disabling pruning.
+hardware/qcom-caf/sm8450/audio/primary-hal: Shared project LineageOS/android_hardware_qcom_audio-ar found, disabling pruning.
+hardware/qcom-caf/sm8450/data-ipa-cfg-mgr: Shared project LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr found, disabling pruning.
+hardware/qcom-caf/thermal: Shared project LineageOS/android_hardware_qcom_thermal found, disabling pruning.
+hardware/qcom/audio: Shared project LineageOS/android_hardware_qcom_audio found, disabling pruning.
+hardware/qcom/wlan: Shared project LineageOS/android_hardware_qcom_wlan found, disabling pruning.
+vendor/qcom/opensource/audio-hal/st-hal-ar: Shared project LineageOS/android_vendor_qcom_opensource_audio-hal_st-hal-ar found, disabling pruning.
